@@ -10,22 +10,23 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity() {
-    var bi :Boolean =false
-    var once :Boolean =false
-    var month :Boolean =false
-    var principal1=1.0
-    var income2=1.0
-lateinit var principal: EditText
-lateinit var income2edit: EditText
+    var bi: Boolean = false
+    var once: Boolean = false
+    var month: Boolean = false
+    var principal1 = 1.0
+    var income2 = 1.0
+    lateinit var principal: EditText
+    lateinit var income2edit: EditText
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-        principal=findViewById(R.id.principalbank)
-        income2edit=findViewById(R.id.income)
+        principal = findViewById(R.id.principalbank)
+        income2edit = findViewById(R.id.income)
     }
+
     fun onRadioButtonClicked(view: View) {
         if (view is RadioButton) {
             // Is the button now checked?
@@ -35,27 +36,31 @@ lateinit var income2edit: EditText
             when (view.getId()) {
                 R.id.radio_biweekly ->
                     if (checked) {
-                        bi=true
+                        bi = true
                     }
                 R.id.radio_weekly ->
                     if (checked) {
-                        once=true
+                        once = true
                     }
                 R.id.radio_monthly ->
                     if (checked) {
-                        month=true
+                        month = true
                     }
             }
         }
 
     }
-    fun onButtonsubClicked(view: View){
-principal1=principal.text.toString().toDouble()
-income2=income2edit.text.toString().toDouble()
-val intenthome=Intent(this,home::class.java).apply{
-putExtra("PRINCIPAL_12",principal1)
-putExtra("incometoadd",income2)
-}
-startActivity(intenthome)
+
+    fun onButtonsubClicked(view: View) {
+        principal1 = principal.text.toString().toDouble()
+        income2 = income2edit.text.toString().toDouble()
+        val intenthome = Intent(this, home::class.java).apply {
+            putExtra("PRINCIPAL_12", principal1)
+            putExtra("incometoadd", income2)
+            putExtra("biweek",bi)
+            putExtra("week",once)
+            putExtra("monthly",month)
+        }
+        startActivity(intenthome)
     }
 }
